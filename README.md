@@ -2,12 +2,12 @@
 
 [![test](https://github.com/GrantBirki/issue-template-parser/actions/workflows/test.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/test.yml) [![lint](https://github.com/GrantBirki/issue-template-parser/actions/workflows/lint.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/lint.yml) [![package-check](https://github.com/GrantBirki/issue-template-parser/actions/workflows/package-check.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/package-check.yml) [![codeql](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql-analysis.yml) [![coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
-A GitHub Action to convert issues created from issue templates into machine readable JSON
+A GitHub Action to convert issues created from issue templates into machine readable JSON for further processing
 
 ## Setup
 
 ```yaml
-- uses: GrantBirki/issue-template-parser@vX.X.X
+- uses: GrantBirki/issue-template-parser@vX.X.X # <-- Replace with the latest version
   id: issue-parser
   with:
     body: ${{ github.event.issue.body }}
@@ -25,7 +25,7 @@ A GitHub Action to convert issues created from issue templates into machine read
 
 | Output | Description |
 | ------ | ----------- |
-| json | A JSON string of the parsed issue |
+| `json` | A JSON string of the parsed issue |
 
 ## Example
 
