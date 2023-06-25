@@ -19,13 +19,13 @@ A GitHub Action to convert issues created from issue templates into machine read
 
 | Input | Required? | Default | Description |
 | ----- | --------- | ------- | ----------- |
-| body | yes | - | The body of the issue. |
+| `body` | `true` | `${{ github.event.issue.body }}` | The RAW body of the issue to parse if you want to override the default |
 
 ## Outputs
 
 | Output | Description |
 | ------ | ----------- |
-| json | The JSON representation of the issue body |
+| json | A JSON string of the parsed issue |
 
 ## Example
 
