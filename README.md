@@ -1,6 +1,6 @@
 # Issue Template Parser 📜
 
-[![coverage](./badges/coverage.svg)](./badges/coverage.svg)
+[![test](https://github.com/GrantBirki/issue-template-parser/actions/workflows/test.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/test.yml) [![lint](https://github.com/GrantBirki/issue-template-parser/actions/workflows/lint.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/lint.yml) [![package-check](https://github.com/GrantBirki/issue-template-parser/actions/workflows/package-check.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/package-check.yml) [![codeql](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql-analysis.yml) [![coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
 Use this action to convert issues into a unified JSON structure.
 
