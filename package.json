@@ -1,8 +1,8 @@
 {
   "name": "issue-template-parser",
   "private": true,
-  "version": "1.0.0",
-  "description": "Use this action to convert issues into a unified JSON structure",
+  "version": "0.0.0",
+  "description": "A GitHub Action to convert issues created from issue templates into machine readable JSON",
   "main": "index.js",
   "scripts": {
     "format": "prettier --write '**/*.js'",
@@ -18,8 +18,15 @@
     "type": "git",
     "url": "git+https://github.com/GrantBirki/issue-template-parser.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "github",
+    "action",
+    "issue",
+    "template",
+    "parser",
+    "json"
+  ],
+  "author": "Grant Birkinbine",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/GrantBirki/issue-template-parser/issues"
