@@ -1,5 +1,7 @@
 # Issue Template Parser 📜
 
+[![coverage](./badges/coverage.svg)](./badges/coverage.svg)
+
 Use this action to convert issues into a unified JSON structure.
 
 ## Setup
