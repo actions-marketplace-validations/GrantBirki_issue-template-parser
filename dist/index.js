@@ -2881,7 +2881,7 @@ async function parse(body) {
   var parsed_issue_body_dict = {}
 
   body = String(body)
-  core.debug(body)
+  core.info(`parsing body: ${body}`)
 
   // Split the body up by the section headers
   const issue_body_sections_list = body.split('###')
@@ -2920,7 +2920,7 @@ async function parse(body) {
   core.debug(parsed_issue_body_dict)
 
   const parsed_json = JSON.stringify(parsed_issue_body_dict, null, 2)
-  core.debug(parsed_json)
+  core.info(`parsed json: ${parsed_json}`)
 
   // Return the dictionary
   return parsed_json
