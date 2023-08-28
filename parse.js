@@ -45,7 +45,7 @@ export async function parse(body) {
 
   core.debug(parsed_issue_body_dict)
 
-  const parsed_json = JSON.stringify(parsed_issue_body_dict, null, 2)
+  const parsed_json = JSON.stringify(parsed_issue_body_dict, null, 2).replace(/'/g, "\\'")
   core.info(`parsed json: ${parsed_json}`)
 
   // Return the dictionary
