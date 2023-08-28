@@ -104,7 +104,7 @@ jobs:
           body: ${{ github.event.issue.body }}
 
       - name: print the parsed issue in JSON format
-        run: echo '${{ steps.issue-parser.outputs.json }}'
+        run: echo ${{ steps.issue-parser.outputs.json }}
 ```
 
 ## Releasing a New Version 🏷️
