@@ -58,3 +58,10 @@ it('test issue body from newly created issue', async () => {
 
   expect(jsonDict).toEqual(expectedOutputJson)
 })
+
+it('correctly parses an issue with scary quotes', async () => {
+  const expectedOutputJson = JSON.stringify(require('./fixtures/scary-quotes/expected.json'), null , 2)
+  const body = require('./fixtures/scary-quotes/issue').issue.body
+  const jsonDict = await parse(body)
+  expect(jsonDict).toEqual(expectedOutputJson)
+})
