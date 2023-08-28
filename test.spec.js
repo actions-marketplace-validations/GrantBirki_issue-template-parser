@@ -31,8 +31,7 @@ it('model example raw string', async () => {
   const expectedOutput = require('./fixtures/model-example/expected.json')
   const expectedOutputJson = JSON.stringify(expectedOutput, null, 2)
 
-  const body =
-    '### Model Name\r\n\r\nmy cool molecule\r\n\r\n### Model Description\r\n\r\nThis is a prediction for a super cool molecule\r\n\r\n### Ersilia ID\r\n\r\neos11aa\r\n\r\n### Publication\r\n\r\nThe following link is just an example:\r\n\r\nwww.example.com\r\n\r\n### Code\r\n\r\n_No response_\r\n\r\n### License\r\n\r\n_No response_'
+  const body = require('./fixtures/model-example/issue').issue.body
 
   const jsonDict = await parse(body)
 
@@ -57,5 +56,16 @@ it('test issue body from newly created issue', async () => {
 
   const jsonDict = await parse(body)
 
+  expect(jsonDict).toEqual(expectedOutputJson)
+})
+
+it('correctly parses an issue with scary quotes', async () => {
+  const expectedOutputJson = JSON.stringify(
+    require('./fixtures/scary-quotes/expected.json'),
+    null,
+    2
+  ).replace(/'/g, "\\'")
+  const body = require('./fixtures/scary-quotes/issue').issue.body
+  const jsonDict = await parse(body)
   expect(jsonDict).toEqual(expectedOutputJson)
 })
