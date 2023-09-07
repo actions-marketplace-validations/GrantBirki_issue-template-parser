@@ -227,9 +227,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Replace vX.X.X the latest version
       - name: Parse Issue
         id: parse-issue
-        uses: GrantBirki/issue-template-parser@vX.X.X # <-- Replace with the latest version
+        uses: GrantBirki/issue-template-parser@vX.X.X
         with:
           body: ${{ github.event.issue.body }}
 

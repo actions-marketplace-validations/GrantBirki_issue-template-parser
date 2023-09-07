@@ -2763,16 +2763,13 @@ function formatValue(input, csvToList = true) {
         return null;
     }
     // Check for single-line CSV
-    if (csvToList &&
-        value.includes('\n') === false &&
-        value.includes(',') === true) {
+    if (csvToList && !value.includes('\n') && value.includes(',')) {
         return value.split(',').map((item) => item.trim());
     }
     // Check for non-checkbox lines
     // If found, return as a multiline string
     for (const line of value.split('\n')) {
-        if (line.startsWith('- [ ] ') === false &&
-            line.startsWith('- [x] ') === false) {
+        if (!line.startsWith('- [ ] ') && !line.startsWith('- [x] ')) {
             return value;
         }
     }
@@ -2835,7 +2832,7 @@ async function run() {
     // Get other input parameters
     const csvToList = core.getInput('csv_to_list') === 'true';
     core.info('Running action with the following inputs:');
-    core.info(`  csv_to_list: ${csvToList}`);
+    core.info(`  csv_to_list: ${csvToList ? 'true' : 'false'}`);
     core.info(`  body: ${body}`);
     // Parse the body
     const parsedBody = await (0, parse_1.parse)(body, csvToList);
@@ -2892,8 +2889,8 @@ async function parse(body, csvToList = true) {
     const regexp = /### *(?<key>.*?)\s*[\r\n]+(?<value>[\s\S]*?)(?=###|$)/g;
     const matches = body.matchAll(regexp);
     for (const match of matches) {
-        let key = match.groups?.key || '';
-        let value = match.groups?.value || '';
+        let key = match.groups?.key ?? '';
+        let value = match.groups?.value ?? '';
         if (key === '' || value === '')
             continue;
         core.info(`Unformatted Key: ${key}`);

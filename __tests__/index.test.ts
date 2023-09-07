@@ -28,7 +28,28 @@ describe('index', () => {
       }
     })
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { run } = require('../src/index')
+    await run()
+
+    expect(getInputMock).toHaveBeenCalledWith('body', { required: true })
+    expect(getInputMock).toHaveBeenCalledWith('csv_to_list')
+  })
+
+  it('retrieves the updated csv_to_list input', async () => {
+    getInputMock.mockImplementation((name: string) => {
+      switch (name) {
+        case 'body':
+          return fs.readFileSync(
+            '__tests__/fixtures/bug-report/issue.md',
+            'utf8'
+          )
+        case 'csv_to_list':
+          return 'false'
+        default:
+          return ''
+      }
+    })
+
     const { run } = require('../src/index')
     await run()
 
@@ -55,7 +76,6 @@ describe('index', () => {
       fs.readFileSync('__tests__/fixtures/bug-report/expected.json', 'utf8')
     )
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { run } = require('../src/index')
     await run()
 
