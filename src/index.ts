@@ -12,7 +12,7 @@ export async function run(): Promise<void> {
   const csvToList: boolean = core.getInput('csv_to_list') === 'true'
 
   core.info('Running action with the following inputs:')
-  core.info(`  csv_to_list: ${csvToList}`)
+  core.info(`  csv_to_list: ${csvToList ? 'true' : 'false'}`)
   core.info(`  body: ${body}`)
 
   // Parse the body

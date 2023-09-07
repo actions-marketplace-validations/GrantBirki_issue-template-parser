@@ -1,3 +1,5 @@
+<!--markdownlint-disable-->
+
 ### Your contact details
 
 me@me.com

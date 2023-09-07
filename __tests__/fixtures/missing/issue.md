@@ -1,3 +1,5 @@
+<!--markdownlint-disable-->
+
 ### Model Name
 
 ### Model Description

@@ -21,8 +21,8 @@ export async function parse(
   const matches = body.matchAll(regexp)
 
   for (const match of matches) {
-    let key: string = match.groups?.key || ''
-    let value: any = match.groups?.value || ''
+    let key: string = match.groups?.key ?? ''
+    let value: any = match.groups?.value ?? ''
 
     if (key === '' || value === '') continue
 

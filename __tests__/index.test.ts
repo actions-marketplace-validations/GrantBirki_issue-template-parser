@@ -28,6 +28,7 @@ describe('index', () => {
       }
     })
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { run } = require('../src/index')
     await run()
 
@@ -54,6 +55,7 @@ describe('index', () => {
       fs.readFileSync('__tests__/fixtures/bug-report/expected.json', 'utf8')
     )
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { run } = require('../src/index')
     await run()
 

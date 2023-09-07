@@ -43,7 +43,9 @@ extends:
 rules:
   {
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/space-before-function-paren': 'off',
     'camelcase': 'off',
     'i18n-text/no-en': 'off',
     'import/no-commonjs': 'off',

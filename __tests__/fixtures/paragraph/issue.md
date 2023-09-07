@@ -1,3 +1,5 @@
+<!--markdownlint-disable-->
+
 ### My textarea input
 
 1st paragraph

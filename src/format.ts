@@ -39,21 +39,14 @@ export function formatValue(
   }
 
   // Check for single-line CSV
-  if (
-    csvToList &&
-    value.includes('\n') === false &&
-    value.includes(',') === true
-  ) {
+  if (csvToList && !value.includes('\n') && value.includes(',')) {
     return value.split(',').map((item) => item.trim())
   }
 
   // Check for non-checkbox lines
   // If found, return as a multiline string
   for (const line of value.split('\n')) {
-    if (
-      line.startsWith('- [ ] ') === false &&
-      line.startsWith('- [x] ') === false
-    ) {
+    if (!line.startsWith('- [ ] ') && !line.startsWith('- [x] ')) {
       return value
     }
   }
