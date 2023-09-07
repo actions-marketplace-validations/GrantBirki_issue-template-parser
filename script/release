@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Usage:
-# script/release
-
 # COLORS
 OFF='\033[0m'
 RED='\033[0;31m'
@@ -26,5 +23,5 @@ echo -e "${GREEN}OK${OFF} - Tagged: $new_tag"
 
 git push --tags
 
-echo -e "${GREEN}OK${OFF} - Tags pushed to remote! This will trigger a GitHub action release"
+echo -e "${GREEN}OK${OFF} - Tags pushed to remote! This will trigger a release of the GitHub Action"
 echo -e "${GREEN}DONE${OFF}"
