@@ -1,17 +1,26 @@
 name: Issue Template Parser
 description: A GitHub Action to convert issues created from issue templates into machine readable JSON
 author: Grant Birkinbine
+
 branding:
   icon: check-square
   color: green
+
 inputs:
   body:
-    description: The RAW body of the issue to parse if you want to override the default
+    description:
+      The issue body to parse. Defaults to the workflow event body.
     required: true
     default: ${{ github.event.issue.body }}
+  csv_to_list:
+    description: Convert single-line responses with comments to lists.
+    required: true
+    default: 'true'
+
 outputs:
   json:
-    description: A JSON string of the parsed issue
+    description: The parsed issue as a JSON string
+
 runs:
   using: node20
   main: dist/index.js

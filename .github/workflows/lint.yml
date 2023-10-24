@@ -1,9 +1,10 @@
 name: lint
+
 on:
-  pull_request:
+  push:
     branches:
       - main
-  push:
+  pull_request:
     branches:
       - main
 
@@ -12,19 +13,23 @@ permissions:
 
 jobs:
   lint:
+    name: lint
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - name: setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
           cache: npm
 
-      - run: npm ci
+      - name: install dependencies
+        run: npm ci
+
+      - name: check format
+        run: npm run format:check
 
       - name: lint
-        run: |
-          npm run format-check
-          npm run lint
+        run: npm run lint

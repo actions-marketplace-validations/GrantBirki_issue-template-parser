@@ -558,7 +558,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.message}`);
+        Error Message: ${error.result.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
@@ -2722,6 +2722,193 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ 770:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.formatValue = exports.formatKey = void 0;
+/**
+ * Formats a input name to a snake case string
+ *
+ * - Removes leading and trailing whitespace
+ * - Converts to lowercase
+ * - Replaces spaces with underscores
+ * - Replaces non-alphanumeric characters with underscores
+ * - Replaces multiple consecutive underscores with a single underscore
+ */
+function formatKey(name) {
+    return name
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '_')
+        .replace(/^_+|_+$/g, '')
+        .replace(/_+/g, '_');
+}
+exports.formatKey = formatKey;
+/**
+ * Formats a input value to an appropriate type
+ */
+function formatValue(input, csvToList = true) {
+    // Remove any whitespace
+    // Remove any carriage returns
+    // Remove any leading or trailing newlines
+    const value = input
+        .trim()
+        .replace(/\r/g, '')
+        .replace(/^[\n]+|[\n]+$/g, '');
+    // Check for empty response
+    if (value === 'None' || value === '_No response_' || value === '') {
+        return null;
+    }
+    // Check for single-line CSV
+    if (csvToList && !value.includes('\n') && value.includes(',')) {
+        return value.split(',').map((item) => item.trim());
+    }
+    // Check for non-checkbox lines
+    // If found, return as a multiline string
+    for (const line of value.split('\n')) {
+        if (!line.startsWith('- [ ] ') && !line.startsWith('- [x] ')) {
+            return value;
+        }
+    }
+    // At this point, we know that the value is a checkbox list
+    const checkboxes = {
+        selected: [],
+        unselected: []
+    };
+    for (let line of value.split('\n')) {
+        line = line.trim();
+        line.startsWith('- [x] ')
+            ? checkboxes.selected.push(line.replace('- [x] ', ''))
+            : checkboxes.unselected.push(line.replace('- [ ] ', ''));
+    }
+    return checkboxes;
+}
+exports.formatValue = formatValue;
+
+
+/***/ }),
+
+/***/ 144:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.run = void 0;
+const core = __importStar(__nccwpck_require__(186));
+const parse_1 = __nccwpck_require__(89);
+/**
+ * The entrypoint for the action
+ */
+async function run() {
+    // Get the input string
+    const body = core.getInput('body', { required: true });
+    // Get other input parameters
+    const csvToList = core.getInput('csv_to_list') === 'true';
+    core.info('Running action with the following inputs:');
+    core.info(`  csv_to_list: ${csvToList ? 'true' : 'false'}`);
+    core.info(`  body: ${body}`);
+    // Parse the body
+    const parsedBody = await (0, parse_1.parse)(body, csvToList);
+    core.debug(`Parsed body: ${JSON.stringify(parsedBody, null, 2)}`);
+    core.setOutput('json', JSON.stringify(parsedBody));
+}
+exports.run = run;
+run();
+
+
+/***/ }),
+
+/***/ 89:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parse = void 0;
+const core = __importStar(__nccwpck_require__(186));
+const format_1 = __nccwpck_require__(770);
+/**
+ * Helper function to parse the body of the issue template
+ *
+ * @param {string} body The body of the issue template
+ * @returns {object} A dictionary of the parsed body
+ */
+async function parse(body, csvToList = true) {
+    const parsedBody = {};
+    // Match the sections of the issue body
+    const regexp = /### *(?<key>.*?)\s*[\r\n]+(?<value>[\s\S]*?)(?=###|$)/g;
+    const matches = body.matchAll(regexp);
+    for (const match of matches) {
+        let key = match.groups?.key ?? '';
+        let value = match.groups?.value ?? '';
+        if (key === '' || value === '')
+            continue;
+        core.info(`Unformatted Key: ${key}`);
+        core.info(`Unformatted Value: ${value}`);
+        key = (0, format_1.formatKey)(key);
+        value = (0, format_1.formatValue)(value, csvToList);
+        core.info(`Formatted Key: ${key}`);
+        core.info(`Formatted Value: ${JSON.stringify(value)}`);
+        parsedBody[key] = value;
+    }
+    // Return the dictionary
+    return parsedBody;
+}
+exports.parse = parse;
+
+
+/***/ }),
+
 /***/ 491:
 /***/ ((module) => {
 
@@ -2843,127 +3030,18 @@ module.exports = require("util");
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__nccwpck_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nccwpck_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-// ESM COMPAT FLAG
-__nccwpck_require__.r(__webpack_exports__);
-
-// EXPORTS
-__nccwpck_require__.d(__webpack_exports__, {
-  "run": () => (/* binding */ run)
-});
-
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __nccwpck_require__(186);
-;// CONCATENATED MODULE: ./parse.js
-
-
-// Helper function to parse the body of the issue template
-// :param body: The body of the issue template
-// :return: A dictionary of the parsed body
-async function parse(body) {
-  var parsed_issue_body_dict = {}
-
-  body = String(body)
-  core.info(`parsing body: ${body}`)
-
-  // Split the body up by the section headers
-  const issue_body_sections_list = body.split('###')
-
-  core.debug(issue_body_sections_list)
-
-  // Remove the first element of the list, which is empty
-  issue_body_sections_list.shift()
-
-  // Loop over the list of sections
-  for (const section of issue_body_sections_list) {
-    // Split out the issue body sections
-    let issue_body = section.trim().split(/\r?\n/)
-    core.debug(issue_body)
-
-    // make the key lowercase and snake case
-    let key = issue_body[0].trim().toLowerCase().replace(/ /g, '_')
-
-    // Remove the first element of the list, which is the section header
-    issue_body.shift()
-    // Join the list back together with newlines
-    issue_body = issue_body.slice(1).join('\n')
-
-    // get the value from the body as well
-    let value = issue_body.trim()
-
-    // If the value for a field is empty, set it to null
-    if (value === '_No response_' || value === '_No response_"') {
-      value = null
-    }
-
-    // Add the key-value pair to the dictionary
-    parsed_issue_body_dict[key] = value
-  }
-
-  core.debug(parsed_issue_body_dict)
-
-  const parsed_json = JSON.stringify(parsed_issue_body_dict, null, 2).replace(
-    /'/g,
-    "\\'"
-  )
-  core.info(`parsed json: ${parsed_json}`)
-
-  // Return the dictionary
-  return parsed_json
-}
-
-;// CONCATENATED MODULE: ./index.js
-
-
-
-async function run() {
-  const body = core.getInput('body')
-  core.debug(body)
-  const jsonDict = await parse(body)
-  core.setOutput('json', jsonDict)
-}
-
-run()
-
-})();
-
-module.exports = __webpack_exports__;
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(144);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map
