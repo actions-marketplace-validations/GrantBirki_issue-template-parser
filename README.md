@@ -1,10 +1,6 @@
 # Issue Template Parser 📜
 
-[![Check dist/](https://github.com/GrantBirki/issue-template-parser/actions/workflows/check-dist.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/check-dist.yml)
-[![CodeQL](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql.yml)
-[![Continuous Integration](https://github.com/GrantBirki/issue-template-parser/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/continuous-integration.yml)
-[![Super Linter](https://github.com/GrantBirki/issue-template-parser/actions/workflows/super-linter.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/super-linter.yml)
-[![Code Coverage](./badges/coverage.svg)](./badges/coverage.svg)
+[![lint](https://github.com/GrantBirki/issue-template-parser/actions/workflows/lint.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/lint.yml) [![test](https://github.com/GrantBirki/issue-template-parser/actions/workflows/test.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/test.yml) [![package-check](https://github.com/GrantBirki/issue-template-parser/actions/workflows/package-check.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/package-check.yml) [![CodeQL](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/GrantBirki/issue-template-parser/actions/workflows/codeql-analysis.yml) [![Code Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
 A GitHub Action to convert issues created from issue templates into machine
 readable JSON for further processing
