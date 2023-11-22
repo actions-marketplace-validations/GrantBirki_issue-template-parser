@@ -1,16 +1,27 @@
 version: 2
 
 updates:
-  - package-ecosystem: npm
-    directory: /
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: monthly
+      interval: "monthly"
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+        patterns:
+          - "*"
+      development-dependencies:
+        dependency-type: "development"
+        patterns:
+          - "*"
     labels:
-      - 'type: dependencies'
+      - "dependencies"
 
   - package-ecosystem: github-actions
-    directory: /
+    directory: "/"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
     schedule:
       interval: monthly
-    labels:
-      - 'type: dependencies'
