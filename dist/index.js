@@ -24922,7 +24922,8 @@ exports["default"] = _default;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.formatValue = exports.formatKey = void 0;
+exports.formatKey = formatKey;
+exports.formatValue = formatValue;
 /**
  * Formats a input name to a snake case string
  *
@@ -24940,7 +24941,6 @@ function formatKey(name) {
         .replace(/^_+|_+$/g, '')
         .replace(/_+/g, '_');
 }
-exports.formatKey = formatKey;
 /**
  * Formats a input value to an appropriate type
  */
@@ -24980,7 +24980,6 @@ function formatValue(input, csvToList = true) {
     }
     return checkboxes;
 }
-exports.formatValue = formatValue;
 
 
 /***/ }),
@@ -25014,7 +25013,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.run = void 0;
+exports.run = run;
 const core = __importStar(__nccwpck_require__(2186));
 const parse_1 = __nccwpck_require__(6089);
 /**
@@ -25033,7 +25032,6 @@ async function run() {
     core.debug(`Parsed body: ${JSON.stringify(parsedBody, null, 2)}`);
     core.setOutput('json', JSON.stringify(parsedBody));
 }
-exports.run = run;
 run();
 
 
@@ -25068,7 +25066,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parse = void 0;
+exports.parse = parse;
 const core = __importStar(__nccwpck_require__(2186));
 const format_1 = __nccwpck_require__(5770);
 /**
@@ -25098,7 +25096,6 @@ async function parse(body, csvToList = true) {
     // Return the dictionary
     return parsedBody;
 }
-exports.parse = parse;
 
 
 /***/ }),
